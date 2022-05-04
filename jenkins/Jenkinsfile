@@ -8,12 +8,14 @@ pipeline {
     environment {
         CI = 'true'
     }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'npm install'
-            }
-        }
+    
+   stages {
+        stage('Initialize')
+       {
+        def dockerHome = tool 'MyDocker'
+        def mavenHome  = tool 'MyMaven'
+        env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+      }
         stage('Test') {
             steps {
                 sh './jenkins/scripts/test.sh'

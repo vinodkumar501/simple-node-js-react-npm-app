@@ -11,4 +11,9 @@ node {
     {
         checkout scm
     }
+      stage('Build') 
+           {
+            sh 'uname -a'
+            sh 'mvn -B -DskipTests clean package'  
+          }
 }
